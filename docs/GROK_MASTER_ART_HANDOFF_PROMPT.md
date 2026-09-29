@@ -396,3 +396,339 @@ That document must contain:
 Claude is a finisher/reviewer, not the primary builder.
 
 The objective is to get the maximum amount of complete Wonder Kid functionality from Grok while reserving Claude's more expensive usage for work where deeper review or reasoning adds meaningful value.
+
+
+# FINAL COMPLETION / QA WORKFLOW — REQUIRED
+
+This project uses a three-gate completion process.
+
+## GATE 1 — GROK IMPLEMENTATION: 80–90%
+
+Grok is responsible for getting Wonder Kid to approximately 80–90% implementation completeness.
+
+Grok must:
+- build the systems
+- connect the systems
+- integrate available art
+- use placeholders where final art is not yet available
+- implement the gameplay framework
+- implement the Meadow
+- implement the player
+- implement Chanel
+- implement animations/state machines
+- implement UI
+- implement save/load
+- implement the adventure framework
+- implement education/content data structures
+- implement energy
+- implement inventory/data systems required by the current scope
+- implement two-player foundation where currently required
+- implement journal/world-state foundations
+- write tests
+- run tests
+- fix ordinary bugs
+- document known limitations
+
+Grok must NOT stop at a pretty prototype.
+
+Grok must leave the project structurally complete enough that Claude can test and finish it without rebuilding the architecture.
+
+### Grok completion report
+
+Before handing off to Claude, create/update:
+docs/GROK_COMPLETION_REPORT.md
+
+Include:
+- implemented systems
+- implemented scenes
+- implemented gameplay loops
+- implemented character systems
+- implemented Chanel systems
+- implemented animation systems
+- implemented save/load
+- implemented UI
+- tests run
+- tests passed
+- known failures
+- placeholders remaining
+- missing art
+- known technical debt
+- exact files Claude should inspect
+
+Do not claim 90% merely because many files exist. Completion means working, connected functionality.
+
+---
+
+# GATE 2 — CLAUDE COMPLETE INTEGRATION + QA: 100%
+
+Claude is NOT the second developer rebuilding Wonder Kid.
+
+Claude is the final integration engineer, test engineer, architecture verifier, and release-quality reviewer.
+
+Claude's job is to take Grok's approximately 80–90% implementation and bring the project to a verified 100% completion state for the defined V1 scope.
+
+## 1. TEST EVERYTHING
+
+Run the full automated test suite.
+
+Run headless tests where practical.
+
+Run integration tests.
+
+Run save/load tests.
+
+Run data validation.
+
+Run asset/path validation.
+
+Run scene-loading validation.
+
+Run animation/state validation.
+
+Run gameplay-flow validation.
+
+Run error/edge-case tests.
+
+Fix failures rather than merely reporting them when the fix is within the current V1 scope.
+
+## 2. VERIFY ARCHITECTURE
+
+Verify that the architecture is actually connected end-to-end.
+
+Check:
+- game boot
+- main menu
+- world loading
+- player spawning
+- character data
+- modular character assembly
+- movement
+- interaction system
+- Chanel spawning/following/interactions
+- animation state machines
+- asset registry
+- world state
+- adventure framework
+- educational content data
+- energy system
+- inventory/data systems
+- journal
+- save/load
+- settings
+- parent area foundations
+- two-player foundation where implemented
+- local data provider
+- future provider interface
+- scene transitions
+- error handling
+
+Do not accept dead code, disconnected systems, fake buttons, placeholder APIs that are supposed to be functional, or features that appear complete but do nothing.
+
+## 3. VERIFY ART INTEGRATION
+
+Check every production-ready asset currently in the repository.
+
+Verify:
+- paths
+- imports
+- dimensions
+- transparency
+- pivots
+- anchors
+- animation frame order
+- scale
+- collision
+- scene placement
+- naming
+- asset registry references
+
+If art is missing, do not block unrelated systems. Use the approved placeholder architecture and document the exact missing production asset.
+
+## 4. VERIFY THE COMPLETE CORE LOOP
+
+The following must work from a clean launch:
+
+START GAME
+→ HOME / MAIN MENU
+→ CHARACTER
+→ MEADOW
+→ MOVE
+→ EXPLORE
+→ INTERACT
+→ CHOOSE / REASON
+→ ADVENTURE SYSTEM
+→ RESULT / CONSEQUENCE
+→ JOURNAL / DISCOVERY
+→ WORLD STATE
+→ SAVE
+→ EXIT
+→ REOPEN
+→ LOAD
+→ CONTINUE
+
+Test this as an actual user flow, not just individual functions.
+
+## 5. VERIFY CHANEL
+
+Chanel must:
+- load correctly
+- appear correctly
+- move correctly
+- animate correctly
+- follow/interact correctly
+- respond to supported interactions
+- save/load correctly
+- remain visually consistent
+
+Chanel cannot be treated as optional content.
+
+## 6. VERIFY FAILURE AND RECOVERY
+
+Test what happens when:
+- an asset is missing
+- save data is absent
+- save data is malformed
+- a scene fails to load
+- an invalid content ID is encountered
+- an animation is unavailable
+- a player exits mid-flow
+- a puzzle/adventure is restarted
+
+The game should fail safely and recover where appropriate.
+
+## 7. VERIFY PERFORMANCE
+
+Check for:
+- unnecessary memory growth
+- repeated asset loading
+- runaway processes
+- excessive scene duplication
+- animation/state leaks
+- obvious frame-rate problems
+- save/load stalls
+- input problems
+
+Fix clear issues within scope.
+
+## 8. CREATE THE 100% RELEASE VERIFICATION REPORT
+
+Create:
+docs/CLAUDE_FINAL_REVIEW.md
+
+It must contain:
+
+### A. SYSTEMS VERIFIED
+Every V1 system and whether it works.
+
+### B. TESTS RUN
+Every automated/manual test category.
+
+### C. FAILURES FOUND
+What failed and why.
+
+### D. FIXES MADE
+What Claude fixed.
+
+### E. REMAINING NON-BLOCKING ITEMS
+Only genuinely non-blocking items.
+
+### F. MISSING ART
+Exact production assets still needed.
+
+### G. RELEASE BLOCKERS
+Anything that must be fixed before phone testing.
+
+### H. PHONE TEST RECOMMENDATION
+The exact phone test sequence to use next.
+
+### I. FINAL STATUS
+Use one of:
+- NOT READY
+- READY FOR PHONE TEST
+- READY FOR RELEASE CANDIDATE
+
+Do NOT call the project 100% complete merely because tests pass. Architecture and actual end-to-end functionality must also be verified.
+
+---
+
+# GATE 3 — PHONE TEST: REPRESENTATIVE, NOT EVERY LEVEL
+
+We do NOT manually play every adventure/level on the phone before moving forward.
+
+The purpose of phone testing is to verify that the real build works on the target device and that representative gameplay flows survive the actual mobile environment.
+
+Use a risk-based representative test matrix.
+
+## PHONE SMOKE TEST
+
+First verify:
+- install/build
+- launch
+- loading
+- orientation
+- touch input
+- menus
+- settings
+- character screen
+- Meadow
+- movement
+- interaction
+- Chanel
+- save
+- exit
+- relaunch
+- load
+
+## REPRESENTATIVE GAMEPLAY TESTS
+
+Manually test a small representative sample covering different system types rather than every level.
+
+At minimum cover:
+1. one exploration/nature activity
+2. one engineering/physics activity
+3. one logic/reasoning activity
+4. one multi-step activity
+5. one cooking/math/budgeting activity once that system is available
+6. one world-state-changing activity
+7. one two-player flow once two-player is available
+
+The exact final sample can be selected from the implemented adventures based on risk and system coverage.
+
+## PHONE TEST RULE
+
+If the representative tests pass and automated/integration tests cover the remaining content, do NOT manually replay every level just for the sake of checking every level.
+
+Instead verify that all adventures use the same validated adventure framework and data contracts.
+
+Then perform targeted manual tests on any adventure that uses a unique system or unique code path.
+
+This is the required strategy for keeping phone QA efficient while still protecting the game from systemic failures.
+
+---
+
+# DEFINITION OF 100%
+
+For this project, 100% means:
+
+- all defined V1 architecture exists
+- all defined V1 systems are connected
+- all defined V1 core flows work
+- automated tests pass
+- integration tests pass
+- save/load works
+- assets are correctly integrated
+- missing production art is explicitly documented
+- Chanel works
+- the Meadow works
+- representative adventures work
+- no known release-blocking bugs remain
+- Claude has completed the final architecture and QA review
+- the project is explicitly marked READY FOR PHONE TEST
+
+100% does NOT mean every future feature is built.
+
+100% does NOT mean every future world exists.
+
+100% does NOT mean every possible cosmetic exists.
+
+100% means the defined V1 foundation and agreed launch scope are complete, connected, tested, and ready for the next validation gate.
