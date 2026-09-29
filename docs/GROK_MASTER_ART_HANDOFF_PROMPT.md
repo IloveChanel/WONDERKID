@@ -322,3 +322,77 @@ The goal is not to make a pretty mockup.
 The goal is to leave the repository with a real, testable, data-driven Godot game that can consume the final art assets without architecture changes.
 
 Inspect first. Implement second. Report missing art precisely.
+
+
+# AI WORK ALLOCATION — COST CONTROL
+
+Use a 90/10 workflow.
+
+## GROK — TARGET 90%
+
+Grok should complete approximately 90% of the implementation and integration work, including:
+- project structure
+- Godot scenes
+- GDScript systems
+- data models and registries
+- asset loading/integration
+- animation state machines
+- placeholder integration
+- world construction
+- reusable environment setup
+- character integration
+- Chanel integration
+- UI implementation
+- save/load
+- local data
+- gameplay systems
+- adventure framework
+- educational content framework
+- tests
+- validation
+- documentation
+- bug fixes
+- missing-art inventory
+- exact art-generation specifications
+
+Do not leave ordinary implementation work for Claude merely because it is tedious. Complete it in Grok whenever it can be done reliably.
+
+## CLAUDE — TARGET 10%
+
+Claude should be reserved for high-value finishing work after Grok has reached approximately 80–90% completion.
+
+Use Claude primarily for:
+- difficult architectural review
+- complex bugs Grok cannot resolve
+- final code review
+- edge-case testing/reasoning
+- performance review
+- security/privacy review where applicable
+- difficult Godot problems
+- final integration polish
+- identifying subtle omissions
+- final quality-control pass
+
+Do NOT send Claude the entire project just to redo work Grok has already completed.
+
+## HANDOFF RULE
+
+Grok must leave the project in a clean, documented state before Claude is brought in.
+
+When Grok believes the project is approximately 80–90% complete, create:
+`docs/CLAUDE_FINAL_REVIEW.md`
+
+That document must contain:
+1. what is complete
+2. what was tested
+3. what remains
+4. known bugs
+5. known limitations
+6. architecture decisions
+7. files Claude should inspect
+8. specific questions Claude should answer
+9. exact areas where final polish is needed
+
+Claude is a finisher/reviewer, not the primary builder.
+
+The objective is to get the maximum amount of complete Wonder Kid functionality from Grok while reserving Claude's more expensive usage for work where deeper review or reasoning adds meaningful value.
